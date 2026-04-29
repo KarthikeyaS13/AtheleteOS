@@ -34,25 +34,25 @@ As a marathon runner and cyclist, I found that existing apps track workouts, nut
 ## Screenshots
 
 ### Dashboard
-<img width="600" height="1200" alt="Screenshot from 2026-04-29 15-28-58" src="https://github.com/user-attachments/assets/c96de2e7-dee9-47b6-9fc8-588755d4d916" />
+<img width="600" height="550" alt="Screenshot from 2026-04-29 15-44-35" src="https://github.com/user-attachments/assets/65aa795c-2e92-49ea-9fb5-e46c7a00afd9" />
 
 ### Analytics
-<img width="600" height="1200" alt="Screenshot from 2026-04-29 15-29-34" src="https://github.com/user-attachments/assets/d441f520-a417-42d2-9130-fb97fba40837" />
+<img width="600" height="550" alt="Screenshot from 2026-04-29 15-45-12" src="https://github.com/user-attachments/assets/b515a9eb-879d-4528-8ad3-f297896a5fb4" />
 
 ### Workout Logging
-<img width="600" height="1200" alt="Screenshot from 2026-04-29 15-31-14" src="https://github.com/user-attachments/assets/452142b4-b253-4f2e-8b20-5efa7ce3a1a7" />
+<img width="600" height="550" alt="Screenshot from 2026-04-29 15-45-53" src="https://github.com/user-attachments/assets/8c4e1e75-463a-4e6c-a5c2-47b0a6501545" />
 
 ### Nutrition Tracker
-<img width="600" height="1200" alt="Screenshot from 2026-04-29 15-31-45" src="https://github.com/user-attachments/assets/35ef2719-c8eb-4d3a-b67e-b6ca2bfd274f" />
+<img width="600" height="550" alt="Screenshot from 2026-04-29 15-31-45" src="https://github.com/user-attachments/assets/35ef2719-c8eb-4d3a-b67e-b6ca2bfd274f" />
 
 ### Race Planner
-<img width="600" height="1200" alt="Screenshot from 2026-04-29 15-32-11" src="https://github.com/user-attachments/assets/72efb56d-20a6-41e8-ae9c-54d15ba1291f" />
+<img width="600" height="550" alt="Screenshot from 2026-04-29 15-32-11" src="https://github.com/user-attachments/assets/72efb56d-20a6-41e8-ae9c-54d15ba1291f" />
 
 ### Training History
-<img width="600" height="1200" alt="Screenshot from 2026-04-29 15-32-45" src="https://github.com/user-attachments/assets/db37623f-34e0-460c-b05d-1ae902b443a4" />
+<img width="600" height="550" alt="Screenshot from 2026-04-29 15-32-45" src="https://github.com/user-attachments/assets/db37623f-34e0-460c-b05d-1ae902b443a4" />
 
 ### Weekly Report
-<img width="600" height="1200" alt="Screenshot from 2026-04-29 15-32-36" src="https://github.com/user-attachments/assets/dcc82276-60e6-4801-bf10-a8895b958884" />
+<img width="600" height="550" alt="Screenshot from 2026-04-29 15-32-36" src="https://github.com/user-attachments/assets/dcc82276-60e6-4801-bf10-a8895b958884" />
 
 ## How to Run
 npm install  
