@@ -1,16 +1,39 @@
-# React + Vite
+# AthletOS — Multi-Sport Performance Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live: https://athelete-os.vercel.app
 
-Currently, two official plugins are available:
+AthletOS is a full-featured web application built to track and analyze training, nutrition, and performance for endurance athletes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Why I Built This
+As a marathon runner and cyclist, I found that existing apps track workouts, nutrition, and performance separately. I built AthletOS to combine everything into one system.
 
-## React Compiler
+## Features
+- Workout logging (running, cycling, strength, swimming)
+- Training load calculation based on RPE and volume
+- Analytics dashboard (fitness vs fatigue trends)
+- Nutrition tracking (calories, macros, hydration)
+- Race planner with countdown and targets
+- Weekly report export (PDF & Excel)
+- Personal records tracking
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
+- React.js (Vite)
+- Redux Toolkit
+- Tailwind CSS
+- Recharts
+- Formik + Yup
+- jsPDF + ExcelJS
+- LocalStorage (data persistence)
 
-## Expanding the ESLint configuration
+## Key Concepts Implemented
+- Centralized state management
+- Data visualization
+- Performance optimization (memoization, lazy loading)
+- Real-world problem solving
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Screenshots
+(Add your UI screenshots here)
+
+## How to Run
+npm install  
+npm run dev
