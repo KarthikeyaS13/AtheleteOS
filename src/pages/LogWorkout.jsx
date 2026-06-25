@@ -141,6 +141,7 @@ const LogWorkout = () => {
                     dateFormat="dd/MM/yyyy"
                     className={inputClass}
                     placeholderText="DD/MM/YYYY"
+                    popperClassName="z-[9999]"
                   />
                   {errors.date && touched.date && <div className="text-danger text-[10px] font-bold uppercase">{errors.date}</div>}
                 </div>

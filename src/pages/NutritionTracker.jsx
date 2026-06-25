@@ -163,19 +163,20 @@ const NutritionTracker = () => {
    return (
       <div className="space-y-4">
          {/* Header */}
-         <div className="flex justify-between items-center animate-in fade-in slide-up">
+         <div className="flex justify-between items-center animate-in fade-in slide-up relative z-20">
             <div className="relative">
                <div className="absolute -left-4 top-0 w-1 h-full bg-accent rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
                <h1 className="text-3xl font-black text-gray-900 dark:text-white font-display tracking-tight italic uppercase">
                   Nutrition
                </h1>
-               <div className="flex items-center gap-4 animate-in fade-in slide-up" style={{ animationDelay: '100ms' }}>
+               <div className="flex items-center gap-4 animate-in fade-in slide-up relative z-30" style={{ animationDelay: '100ms' }}>
                <DatePicker
                   selected={parseISO(selectedDate)}
                   onChange={(date) => setSelectedDate(date ? format(date, 'yyyy-MM-dd') : todayStr)}
                   dateFormat="dd/MM/yyyy"
                   className="bg-white dark:bg-[#111827] border-2 border-gray-300 dark:border-[#243244] rounded-xl px-4 py-2 text-gray-900 dark:text-white font-bold focus:outline-none focus:border-accent transition-all w-48 shadow-sm text-sm"
                   placeholderText="DD/MM/YYYY"
+                  popperClassName="z-[9999]"
                />
                </div>
             </div>
