@@ -73,28 +73,28 @@ const LogWorkout = () => {
   };
 
   return (
-    <div className="space-y-10 max-w-4xl mx-auto pb-10">
+    <div className="space-y-5 max-w-2xl mx-auto pb-5">
 
       {/* Header */}
       <div className="animate-in fade-in slide-up">
-        <h1 className="text-4xl font-black text-gray-900 dark:text-white font-display tracking-tight italic uppercase">
+        <h1 className="text-3xl font-black text-gray-900 dark:text-white font-display tracking-tight italic uppercase">
           Log Workout
         </h1>
-        <p className="text-gray-500 font-medium mt-2">
+        <p className="text-gray-500 font-medium mt-1 text-sm">
           Enter your session details. Training load is calculated automatically.
         </p>
       </div>
 
       {/* Tabs */}
-      <div className="flex p-1.5 rounded-2xl bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-800 animate-in fade-in slide-up" style={{ animationDelay: '100ms' }}>
+      <div className="flex p-1 rounded-xl bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-800 animate-in fade-in slide-up" style={{ animationDelay: '100ms' }}>
         {sports.map(sport => (
           <button
             key={sport.name}
             onClick={() => setActiveTab(sport.name)}
             className={`
-              flex-1 flex items-center justify-center py-3.5 rounded-xl text-sm font-bold transition-all duration-300
+              flex-1 flex items-center justify-center py-2 rounded-lg text-sm font-bold transition-all duration-300
               ${activeTab === sport.name
-                ? 'bg-white dark:bg-gray-700 text-accent shadow-xl shadow-accent/5'
+                ? 'bg-white dark:bg-gray-700 text-accent shadow-md'
                 : 'text-gray-500 hover:text-gray-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-gray-800'
               }
             `}
@@ -106,7 +106,7 @@ const LogWorkout = () => {
       </div>
 
       {/* Form Card */}
-      <Card className="p-10" style={{ animationDelay: '200ms' }}>
+      <Card className="p-5" style={{ animationDelay: '200ms' }}>
         <Formik
           enableReinitialize
           initialValues={getInitialValues()}
@@ -131,9 +131,9 @@ const LogWorkout = () => {
           }}
         >
           {({ errors, touched, values, setFieldValue }) => (
-            <Form className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-2">
+            <Form className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1">
                   <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Date</label>
                   <DatePicker
                     selected={values.date ? parseISO(values.date) : null}
@@ -145,7 +145,7 @@ const LogWorkout = () => {
                   {errors.date && touched.date && <div className="text-danger text-[10px] font-bold uppercase">{errors.date}</div>}
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1">
                   <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Workout Type</label>
                   <Field as="select" name="type" className={inputClass}>
                     <option value="">Select type...</option>
@@ -160,28 +160,28 @@ const LogWorkout = () => {
                 </div>
 
                 {activeTab !== 'Strength Training' && (
-                  <div className="space-y-2">
+                  <div className="space-y-1">
                     <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Distance (km)</label>
                     <Field name="distance" type="number" className={inputClass} />
                   </div>
                 )}
 
-                <div className="space-y-2">
+                <div className="space-y-1">
                   <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Duration (HH:MM:SS)</label>
-                  <Field name="duration" type="text" className={inputClass} />
+                  <Field name="duration" type="time" step="1" className={inputClass} />
                 </div>
 
-                <div className="space-y-4 md:col-span-2">
+                <div className="space-y-2 md:col-span-2">
                   <div className="flex justify-between items-center">
                     <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Perceived Effort (RPE)</label>
-                    <span className="text-lg font-black text-accent font-display italic">{values.rpe} / 10</span>
+                    <span className="text-base font-black text-accent font-display italic">{values.rpe} / 10</span>
                   </div>
                   <Field type="range" name="rpe" min="1" max="10" className="w-full h-2 bg-gray-200 dark:bg-gray-800 rounded-lg appearance-none cursor-pointer accent-accent" />
                 </div>
 
-                <div className="space-y-2 md:col-span-2">
+                <div className="space-y-1 md:col-span-2">
                   <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Notes</label>
-                  <Field as="textarea" name="notes" className={`${inputClass} min-h-[120px] resize-none`} placeholder="How did it feel?" />
+                  <Field as="textarea" name="notes" className={`${inputClass} min-h-[70px] resize-none`} placeholder="How did it feel?" />
                 </div>
               </div>
 
@@ -189,9 +189,9 @@ const LogWorkout = () => {
                 <LiveLoadPreview values={values} />
               </div>
 
-              <div className="pt-6 flex justify-end">
-                <Button type="submit" size="lg" className="px-12 py-4 text-lg">
-                  <Save size={20} className="mr-3" />
+              <div className="pt-2 flex justify-end">
+                <Button type="submit" size="sm" className="px-8 py-2 text-base">
+                  <Save size={18} className="mr-2" />
                   Save Workout
                 </Button>
               </div>

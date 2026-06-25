@@ -1,28 +1,34 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleSidebar } from '../../store/slices/uiSlice';
+import { logout } from '../../store/slices/authSlice';
 import {
   Zap, LayoutDashboard, PlusCircle, History,
   Utensils, Calendar, Trophy, BarChart2,
-  FileText, Settings, Menu, ChevronLeft
+  FileText, Settings, Menu, ChevronLeft, LogOut,
+  Award
 } from 'lucide-react';
 
 const Sidebar = () => {
   const { sidebarOpen } = useSelector(state => state.ui);
+  const { user } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const navItems = [
     { name: 'Dashboard', path: '/', icon: <LayoutDashboard size={20} /> },
+    { name: 'Leaderboard', path: '/leaderboard', icon: <Trophy size={20} /> },
     { name: 'Log Workout', path: '/log', icon: <PlusCircle size={20} /> },
     { name: 'Training History', path: '/history', icon: <History size={20} /> },
     { name: 'Nutrition Tracker', path: '/nutrition', icon: <Utensils size={20} /> },
     { name: 'Race Planner', path: '/races', icon: <Calendar size={20} /> },
-    { name: 'Personal Records', path: '/prs', icon: <Trophy size={20} /> },
+    { name: 'Personal Records', path: '/prs', icon: <Award size={20} /> },
     { name: 'Analytics', path: '/analytics', icon: <BarChart2 size={20} /> },
     { name: 'Weekly Report', path: '/report', icon: <FileText size={20} /> },
-    { name: 'Settings', path: '/settings', icon: <Settings size={20} /> },
   ];
+
+  // Settings is always last
+  navItems.push({ name: 'Settings', path: '/settings', icon: <Settings size={20} /> });
 
   const settings = useSelector(state => state.settings);
   const fullname = settings?.profile?.name || 'Athlete';
@@ -87,6 +93,23 @@ const Sidebar = () => {
             </span>
           </NavLink>
         ))}
+
+        {/* Logout Button */}
+        <button
+          onClick={() => dispatch(logout())}
+          className="w-full flex items-center p-3 rounded-2xl transition-all duration-300 text-danger hover:bg-danger/5 group relative"
+          title={!sidebarOpen ? 'Logout' : undefined}
+        >
+          <div className="flex flex-shrink-0 items-center justify-center transition-transform duration-300 group-hover:scale-110">
+            <LogOut size={20} className="text-danger" />
+          </div>
+          <span className={`
+            ml-3 truncate transition-all duration-500 font-medium text-danger
+            ${sidebarOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'}
+          `}>
+            Logout
+          </span>
+        </button>
       </div>
 
       {/* Profile Area */}
