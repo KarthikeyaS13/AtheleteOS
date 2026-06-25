@@ -3,6 +3,9 @@ import cors from 'cors';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import helmet from 'helmet';
+import compression from 'compression';
+import rateLimit from 'express-rate-limit';
 import pool, { query } from './db.js';
 import runMigrations from './migrate.js';
 import { requireAuth, requireAdmin } from './authMiddleware.js';
@@ -14,8 +17,56 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'super_secret_jwt_key_athleteos_2026';
 
-app.use(cors());
+app.use(helmet({
+  crossOriginResourcePolicy: false
+}));
+app.use(compression());
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1 || origin.endsWith('.vercel.app')) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'), false);
+  },
+  credentials: true
+}));
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 200,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests from this IP, please try again after 15 minutes.' }
+});
+app.use('/api/', limiter);
+
 app.use(express.json());
+
+app.get('/health', async (req, res) => {
+  try {
+    await query('SELECT 1');
+    res.json({
+      status: 'ok',
+      database: 'connected'
+    });
+  } catch (err) {
+    console.error('Health check failed:', err);
+    res.status(500).json({
+      status: 'error',
+      database: 'disconnected',
+      error: err.message
+    });
+  }
+});
+
 app.use('/api/strava', stravaRouter);
 
 
