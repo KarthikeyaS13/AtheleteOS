@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS prs (
+  owner_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  sport VARCHAR(50) NOT NULL,
+  event VARCHAR(50) NOT NULL,
+  value VARCHAR(50) NOT NULL,
+  date DATE NOT NULL,
+  previous_value VARCHAR(50),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (owner_id, sport, event)
+);

@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS workouts (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  owner_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  date DATE NOT NULL,
+  sport VARCHAR(50) NOT NULL,
+  type VARCHAR(50),
+  distance NUMERIC(10, 2),
+  duration VARCHAR(50) NOT NULL,
+  rpe INTEGER NOT NULL,
+  load_score INTEGER NOT NULL,
+  notes TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);

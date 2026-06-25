@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { api } from "../utils/api";
 import { useSelector, useDispatch } from "react-redux";
 import { Card } from "../components/UI/Card";
 import { Button } from "../components/UI/Button";
@@ -71,11 +72,7 @@ const NutritionTracker = () => {
 
    const fetchNutrition = async (food, grams) => {
       try {
-         const res = await fetch(
-            `https://api.edamam.com/api/nutrition-data?app_id=${import.meta.env.VITE_EDAMAM_APP_ID}&app_key=${import.meta.env.VITE_EDAMAM_APP_KEY}&ingr=${grams}g ${food}`,
-         );
-
-         const data = await res.json();
+         const data = await api.get(`/nutrition/proxy?food=${encodeURIComponent(food)}&grams=${grams}`);
 
          if (!data || data.calories === 0) return null;
 
@@ -164,12 +161,12 @@ const NutritionTracker = () => {
    // };
 
    return (
-      <div className="space-y-6">
+      <div className="space-y-4">
          {/* Header */}
          <div className="flex justify-between items-center animate-in fade-in slide-up">
             <div className="relative">
                <div className="absolute -left-4 top-0 w-1 h-full bg-accent rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
-               <h1 className="text-4xl font-black text-gray-900 dark:text-white font-display tracking-tight italic uppercase">
+               <h1 className="text-3xl font-black text-gray-900 dark:text-white font-display tracking-tight italic uppercase">
                   Nutrition
                </h1>
                <div className="flex items-center gap-4 animate-in fade-in slide-up" style={{ animationDelay: '100ms' }}>
@@ -177,16 +174,16 @@ const NutritionTracker = () => {
                   selected={parseISO(selectedDate)}
                   onChange={(date) => setSelectedDate(date ? format(date, 'yyyy-MM-dd') : todayStr)}
                   dateFormat="dd/MM/yyyy"
-                  className="bg-white dark:bg-[#111827] border-2 border-gray-300 dark:border-[#243244] rounded-xl px-4 py-2.5 text-gray-900 dark:text-white font-bold focus:outline-none focus:border-accent transition-all w-48 shadow-sm"
+                  className="bg-white dark:bg-[#111827] border-2 border-gray-300 dark:border-[#243244] rounded-xl px-4 py-2 text-gray-900 dark:text-white font-bold focus:outline-none focus:border-accent transition-all w-48 shadow-sm text-sm"
                   placeholderText="DD/MM/YYYY"
                />
                </div>
             </div>
          </div>
 
-         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {/* Macros Panel */}
-            <Card className="col-span-1 flex flex-col items-center justify-center py-8">
+            <Card className="col-span-1 flex flex-col items-center justify-center py-4 px-2">
                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 self-start w-full px-4">
                   Daily Targets
                </h3>
@@ -221,7 +218,7 @@ const NutritionTracker = () => {
                   </div>
                </div>
 
-               <div className="w-full px-6 space-y-4 mt-6">
+               <div className="w-full px-4 space-y-2 mt-4">
                   {[
                      {
                         label: "Protein",
@@ -264,8 +261,8 @@ const NutritionTracker = () => {
                   ))}
                </div>
 
-               <div className="w-full px-6 mt-8">
-                  <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+               <div className="w-full px-4 mt-5">
+                  <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-1.5 flex items-center gap-2">
                      <Droplets size={16} className="text-accent" />
                      Hydration ({dailyData.hydration}/{targets.dailyWater})
                   </h4>
@@ -290,14 +287,14 @@ const NutritionTracker = () => {
             </Card>
 
             {/* Meals */}
-            <div className="col-span-2 space-y-4">
+            <div className="col-span-2 space-y-2.5">
                {["Breakfast", "Lunch", "Dinner", "Snacks"].map((meal) => (
                   <Card
                      key={meal}
                      className="p-0 overflow-hidden"
                   >
-                     <div className="p-4 bg-gray-50/50 dark:bg-[#1e293b]/50 border-b border-gray-200 dark:border-gray-800 flex justify-between items-center">
-                        <h3 className="font-bold text-lg text-gray-900 dark:text-white">
+                     <div className="py-2 px-3 bg-gray-50/50 dark:bg-[#1e293b]/50 border-b border-gray-200 dark:border-gray-800 flex justify-between items-center">
+                        <h3 className="font-bold text-base text-gray-900 dark:text-white">
                            {meal}
                         </h3>
                         <Button
@@ -313,9 +310,9 @@ const NutritionTracker = () => {
                      </div>
 
 
-                     <div className="p-4 space-y-2">
+                     <div className="py-2 px-3 space-y-2">
                         {dailyData[meal].length === 0 ? (
-                           <p className="text-sm text-gray-500 dark:text-gray-400 italic text-center py-2">
+                           <p className="text-xs text-gray-500 dark:text-gray-400 italic text-center py-1">
                               No food logged yet.
                            </p>
                         ) : (
@@ -325,18 +322,18 @@ const NutritionTracker = () => {
                                  className="flex justify-between items-center group"
                               >
                                  <div>
-                                    <p className="text-gray-900 dark:text-white font-medium">
+                                    <p className="text-gray-900 dark:text-white font-medium text-sm">
                                        {item.name}
                                     </p>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                                    <p className="text-[11px] text-gray-500 dark:text-gray-400">
                                        {item.quantity} {item.unit} • {item.protein}P /{" "}
                                        {item.carbs}C / {item.fat}F
                                     </p>
                                  </div>
                                  <div className="flex items-center gap-4">
-                                    <span className="font-bold text-accent">
+                                    <span className="font-bold text-accent text-sm">
                                        {item.calories}{" "}
-                                       <span className="text-xs text-gray-500">kcal</span>
+                                       <span className="text-[10px] text-gray-500 font-normal">kcal</span>
                                     </span>
                                     <button
                                        onClick={() =>

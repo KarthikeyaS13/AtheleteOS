@@ -58,51 +58,51 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="space-y-10 pb-10">
+    <div className="space-y-5 pb-5">
       {/* Welcome Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 animate-in fade-in slide-up">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 animate-in fade-in slide-up">
         <div className="relative">
           <div className="absolute -left-4 top-0 w-1 h-full bg-accent rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
-          <h1 className="text-4xl font-black text-gray-900 dark:text-white font-display tracking-tight italic uppercase">
+          <h1 className="text-3xl font-black text-gray-900 dark:text-white font-display tracking-tight italic uppercase">
             Today's Snapshot
           </h1>
-          <p className="text-gray-500 font-medium ml-1 mt-1">Welcome back, Athlete. Here's your performance data.</p>
+          <p className="text-gray-500 font-medium ml-1 mt-1 text-sm">Welcome back, Athlete. Here's your performance data.</p>
         </div>
         <Link to="/log">
-          <Button size="lg" className="px-8 shadow-2xl hover:scale-105 transition-transform">
-            <PlusCircle size={20} className="mr-2" />
+          <Button size="sm" className="px-6 shadow-xl hover:scale-105 transition-transform">
+            <PlusCircle size={18} className="mr-2" />
             Quick Log
           </Button>
         </Link>
       </div>
 
       {/* Primary Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { label: 'Training Load', val: Math.round(todaysLoad), icon: <Activity />, color: 'accent', trend: '+12%' },
           { label: 'Weekly Volume', val: `${Math.round(weeklyDistance)}km`, icon: <Flame />, color: 'purple-500', sub: '/ 80km target', progress: (weeklyDistance / 80) * 100 },
           { label: 'Nutrition', val: `${totalCals}kcal`, icon: <Utensils />, color: 'warning', sub: 'Balanced Macros' },
           { label: 'Recovery', val: recoveryScore.toFixed(1), icon: <HeartPulse />, color: 'success', sub: '/ 10 score', progress: recoveryScore * 10 }
         ].map((stat, i) => (
-          <Card key={i} className="flex flex-col p-6 h-full" style={{ animationDelay: `${i * 100}ms` }}>
-            <div className="flex justify-between items-start mb-4">
-              <div className={`p-3 rounded-2xl bg-${stat.color}/10 text-${stat.color} shadow-inner`}>
+          <Card key={i} className="flex flex-col p-4 h-full" style={{ animationDelay: `${i * 100}ms` }}>
+            <div className="flex justify-between items-start mb-2">
+              <div className={`p-2 rounded-xl bg-${stat.color}/10 text-${stat.color} shadow-inner`}>
                 {stat.icon}
               </div>
               {stat.trend && (
-                <span className="flex items-center gap-1 text-[10px] font-black text-success bg-success/10 px-2 py-1 rounded-lg border border-success/20">
+                <span className="flex items-center gap-1 text-[10px] font-black text-success bg-success/10 px-2 py-0.5 rounded-lg border border-success/20">
                   <TrendingUp size={10} /> {stat.trend}
                 </span>
               )}
             </div>
-            <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">{stat.label}</p>
+            <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">{stat.label}</p>
             <div className="flex items-baseline gap-2">
-              <h2 className="text-4xl font-black text-gray-900 dark:text-white font-display italic">{stat.val}</h2>
-              {stat.sub && <span className="text-xs text-gray-400 font-medium">{stat.sub}</span>}
+              <h2 className="text-3xl font-black text-gray-900 dark:text-white font-display italic">{stat.val}</h2>
+              {stat.sub && <span className="text-[10px] text-gray-400 font-medium">{stat.sub}</span>}
             </div>
             
             {stat.progress !== undefined && (
-              <div className="mt-4 w-full bg-gray-100 dark:bg-gray-800/50 rounded-full h-2 overflow-hidden shadow-inner">
+              <div className="mt-2.5 w-full bg-gray-100 dark:bg-gray-800/50 rounded-full h-1.5 overflow-hidden shadow-inner">
                 <div 
                   className={`h-full rounded-full transition-all duration-1000 ease-out bg-${stat.color}`}
                   style={{ width: `${Math.min(100, stat.progress)}%` }}
@@ -114,14 +114,14 @@ const Dashboard = () => {
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* Load Chart */}
-        <Card className="lg:col-span-8 p-8 overflow-hidden" style={{ animationDelay: '400ms' }}>
-          <div className="flex justify-between items-center mb-8">
-            <h3 className="text-xl font-black text-gray-900 dark:text-white font-display italic uppercase tracking-tight">Performance Trends</h3>
-            <div className="flex gap-4">
+        <Card className="lg:col-span-8 p-4 overflow-hidden" style={{ animationDelay: '400ms' }}>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-lg font-black text-gray-900 dark:text-white font-display italic uppercase tracking-tight">Performance Trends</h3>
+            <div className="flex gap-3">
                {['Run', 'Cycle', 'Swim', 'Strength'].map((s, i) => (
-                 <div key={i} className="flex items-center gap-2">
+                 <div key={i} className="flex items-center gap-1.5">
                     <div className={`w-2 h-2 rounded-full bg-${i === 0 ? 'accent' : i === 1 ? 'success' : i === 2 ? 'purple-500' : 'warning'}`} />
                     <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{s}</span>
                  </div>
@@ -129,7 +129,7 @@ const Dashboard = () => {
             </div>
           </div>
           
-          <div className="h-[350px] w-full">
+          <div className="h-[280px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
@@ -178,24 +178,24 @@ const Dashboard = () => {
         </Card>
 
         {/* Races & PRs */}
-        <div className="lg:col-span-4 space-y-8">
-           <Card className="p-8" style={{ animationDelay: '500ms' }}>
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-xl font-black text-gray-900 dark:text-white font-display italic uppercase tracking-tight">Race Clock</h3>
-                <CalIcon size={20} className="text-accent" />
+        <div className="lg:col-span-4 space-y-4">
+           <Card className="p-4" style={{ animationDelay: '500ms' }}>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-black text-gray-900 dark:text-white font-display italic uppercase tracking-tight">Race Clock</h3>
+                <CalIcon size={18} className="text-accent" />
               </div>
-              <div className="space-y-4">
+              <div className="space-y-2">
                 {races.slice(0, 3).map((race, i) => {
                   const daysTo = differenceInDays(new Date(race.date), new Date());
                   return (
-                    <div key={race.id} className="group p-4 rounded-2xl bg-gray-50 dark:bg-gray-800/40 border border-transparent hover:border-accent/30 transition-all">
+                    <div key={race.id} className="group py-2 px-3 rounded-xl bg-gray-50 dark:bg-gray-800/40 border border-transparent hover:border-accent/30 transition-all">
                       <div className="flex justify-between items-center">
                          <div>
                             <p className="text-sm font-bold text-gray-900 dark:text-white">{race.name}</p>
                             <p className="text-[10px] font-black text-accent uppercase tracking-widest">{race.distance}KM • {race.targetTime}</p>
                          </div>
                          <div className="text-right">
-                            <span className="text-2xl font-black text-gray-900 dark:text-white italic">{Math.max(0, daysTo)}</span>
+                            <span className="text-xl font-black text-gray-900 dark:text-white italic">{Math.max(0, daysTo)}</span>
                             <p className="text-[8px] font-bold text-gray-500 uppercase tracking-tighter">Days Left</p>
                          </div>
                       </div>
@@ -205,19 +205,19 @@ const Dashboard = () => {
               </div>
            </Card>
 
-           <Card className="p-8 bg-gradient-to-br from-accent/5 to-purple-500/5" style={{ animationDelay: '600ms' }}>
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-xl font-black text-gray-900 dark:text-white font-display italic uppercase tracking-tight">Hall of Fame</h3>
-                <Trophy size={20} className="text-warning" />
+           <Card className="p-4 bg-gradient-to-br from-accent/5 to-purple-500/5" style={{ animationDelay: '600ms' }}>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-black text-gray-900 dark:text-white font-display italic uppercase tracking-tight">Hall of Fame</h3>
+                <Trophy size={18} className="text-warning" />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-2">
                  {[
                    { label: '5K Run', val: '22:30', sub: 'was 23:15', up: true },
                    { label: '100K Cycle', val: '3:20:00', sub: 'New PR!' }
                  ].map((pr, i) => (
-                   <div key={i} className="p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-sm border border-gray-100 dark:border-gray-800">
-                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">{pr.label}</p>
-                      <p className="text-xl font-black text-gray-900 dark:text-white italic">{pr.val}</p>
+                   <div key={i} className="p-3 rounded-xl bg-white dark:bg-gray-900 shadow-sm border border-gray-100 dark:border-gray-800">
+                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">{pr.label}</p>
+                      <p className="text-lg font-black text-gray-900 dark:text-white italic">{pr.val}</p>
                       <p className={`text-[9px] font-bold ${pr.up ? 'text-success' : 'text-accent'}`}>{pr.sub}</p>
                    </div>
                  ))}

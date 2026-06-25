@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Sidebar from './Sidebar';
 import Header from './Header';
+import StravaPRBanner from '../Strava/StravaPRBanner';
 
 const Layout = () => {
   const { sidebarOpen } = useSelector(state => state.ui);
@@ -16,12 +17,14 @@ const Layout = () => {
         }`}
       >
         <Header />
-        <main className="flex-1 p-4 md:p-8 max-w-7xl mx-auto w-full">
+        <main className="flex-1 p-3 md:p-5 max-w-[1400px] mx-auto w-full">
           <Outlet />
         </main>
       </div>
+      <StravaPRBanner />
     </div>
   );
 };
 
 export default Layout;
+

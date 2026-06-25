@@ -28,26 +28,26 @@ const RacePlanner = () => {
     "w-full bg-white dark:bg-[#111827] border-2 border-gray-300 dark:border-[#243244] rounded-xl px-4 py-2.5 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/50 transition-all";
 
   return (
-    <div className="space-y-8 pb-10 max-w-5xl mx-auto">
+    <div className="space-y-4 pb-5 max-w-3xl mx-auto">
       {/* Header */}
       <div className="flex justify-between items-center animate-in fade-in slide-up">
         <div className="relative">
           <div className="absolute -left-4 top-0 w-1 h-full bg-accent rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
-          <h1 className="text-3xl font-black text-gray-900 dark:text-white font-display tracking-tight italic uppercase">
+          <h1 className="text-2xl font-black text-gray-900 dark:text-white font-display tracking-tight italic uppercase">
             Race Planner
           </h1>
           <p className="text-gray-500 text-sm font-medium ml-1 mt-0.5">
             Countdown to glory. Map out your season.
           </p>
         </div>
-        <Button onClick={() => setIsAddModalOpen(true)} size="md" className="shadow-2xl hover:scale-105 transition-transform">
-          <PlusCircle size={18} className="mr-2" />
+        <Button onClick={() => setIsAddModalOpen(true)} size="sm" className="shadow-lg hover:scale-105 transition-transform">
+          <PlusCircle size={16} className="mr-1.5" />
           Add Race
         </Button>
       </div>
 
       {/* Cards List */}
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 gap-3">
         {races.map((race, index) => {
           const daysTo = differenceInDays(parseISO(race.date), new Date());
           const isNext = index === 0 && daysTo > 0;
@@ -62,8 +62,8 @@ const RacePlanner = () => {
               {/* Left Color Bar */}
               <div className={`w-1.5 h-full absolute left-0 top-0 ${isNext ? 'bg-accent' : 'bg-gray-200 dark:bg-gray-800'}`} />
 
-              <div className="flex-1 p-6 md:pr-4 ml-2">
-                <div className="flex items-center gap-2 mb-3">
+              <div className="flex-1 p-4 md:pr-3 ml-2">
+                <div className="flex items-center gap-2 mb-1.5">
                   <span className="px-2 py-0.5 rounded-full bg-accent/10 text-accent text-[9px] font-black uppercase tracking-widest border border-accent/20">
                     {race.type}
                   </span>
@@ -77,11 +77,11 @@ const RacePlanner = () => {
                   )}
                 </div>
 
-                <h2 className="text-xl font-black text-gray-900 dark:text-white font-display italic uppercase mb-3 group-hover:text-accent transition-colors">
+                <h2 className="text-lg font-black text-gray-900 dark:text-white font-display italic uppercase mb-1.5 group-hover:text-accent transition-colors">
                   {race.name}
                 </h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-gray-500 font-medium">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-500 font-medium">
                   <div className="flex items-center gap-2">
                     <Calendar size={14} className="text-gray-400" />
                     <span>{format(parseISO(race.date), 'MMM d, yyyy')}</span>
@@ -94,14 +94,14 @@ const RacePlanner = () => {
               </div>
 
               {/* Countdown / Status Section */}
-              <div className="md:w-48 flex-shrink-0 bg-gray-50/50 dark:bg-[#1e293b]/20 p-6 flex flex-col items-center justify-center border-l border-gray-100 dark:border-gray-800 relative">
+              <div className="md:w-48 flex-shrink-0 bg-gray-50/50 dark:bg-[#1e293b]/20 p-4 flex flex-col items-center justify-center border-l border-gray-100 dark:border-gray-800 relative">
                 <div className="absolute top-3 right-3 flex gap-1 opacity-0 group-hover:opacity-100 transition-all">
                   <button
                     onClick={() => setEditingRace(race)}
                     className="p-1.5 text-gray-400 hover:text-accent hover:bg-accent/10 rounded-lg transition-all"
                   >
                     <Save size={14} className="hidden" /> {/* Placeholder for edit2 */}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-edit-2"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-edit-2"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
                   </button>
                   <button
                     onClick={() => {
@@ -117,7 +117,7 @@ const RacePlanner = () => {
 
                 {daysTo >= 0 ? (
                   <div className="text-center">
-                    <div className="text-4xl font-black text-accent font-display italic leading-none mb-1">
+                    <div className="text-3xl font-black text-accent font-display italic leading-none mb-1">
                       {daysTo}
                     </div>
                     <p className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em]">
@@ -140,15 +140,15 @@ const RacePlanner = () => {
         })}
 
         {races.length === 0 && (
-          <div className="text-center py-16 animate-in fade-in zoom-in">
-            <div className="inline-flex p-5 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-400 mb-5">
-              <Flag size={40} />
+          <div className="text-center py-8 animate-in fade-in zoom-in">
+            <div className="inline-flex p-3 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-400 mb-3">
+              <Flag size={32} />
             </div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">No races planned yet</h3>
-            <p className="text-sm text-gray-500 max-w-xs mx-auto mb-6">
+            <h3 className="text-base font-bold text-gray-900 dark:text-white mb-1">No races planned yet</h3>
+            <p className="text-sm text-gray-500 max-w-xs mx-auto mb-4">
               Set a goal and start working towards it. Add your first race to begin the countdown.
             </p>
-            <Button onClick={() => setIsAddModalOpen(true)} size="md">
+            <Button onClick={() => setIsAddModalOpen(true)} size="sm">
               Add Your First Race
             </Button>
           </div>
@@ -158,13 +158,13 @@ const RacePlanner = () => {
       {/* RACE MODAL (ADD & EDIT) */}
       {(isAddModalOpen || editingRace) && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[100] animate-in fade-in duration-300">
-          <Card className="max-w-xl w-full mx-4 p-8 shadow-2xl transform animate-in zoom-in-95 duration-300">
+          <Card className="max-w-xl w-full mx-4 p-8 shadow-2xl transform animate-in zoom-in-95 duration-300 !overflow-visible">
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-black text-gray-900 dark:text-white font-display italic uppercase flex items-center gap-3">
                 <Flag size={28} className="text-accent" />
                 {editingRace ? 'Edit Race' : 'Add New Race'}
               </h2>
-              <button 
+              <button
                 onClick={() => {
                   setIsAddModalOpen(false);
                   setEditingRace(null);
@@ -195,7 +195,7 @@ const RacePlanner = () => {
                 <Form className="space-y-6">
                   <div className="space-y-1.5">
                     <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Race Name</label>
-                    <Field name="name" type="text" placeholder="e.g. London Marathon" className={inputClass} />
+                    <Field name="name" type="text" placeholder="e.g. NMDC Marathon" className={inputClass} />
                     {errors.name && touched.name && <div className="text-danger text-[10px] font-bold uppercase">{errors.name}</div>}
                   </div>
 
@@ -208,6 +208,8 @@ const RacePlanner = () => {
                         dateFormat="dd/MM/yyyy"
                         className={inputClass}
                         placeholderText="DD/MM/YYYY"
+                        popperPlacement="bottom-start"
+                        popperClassName="z-[9999]"
                       />
                     </div>
 
@@ -236,9 +238,9 @@ const RacePlanner = () => {
                   </div>
 
                   <div className="flex gap-4 pt-6">
-                    <Button 
-                      type="button" 
-                      variant="secondary" 
+                    <Button
+                      type="button"
+                      variant="secondary"
                       className="flex-1"
                       onClick={() => {
                         setIsAddModalOpen(false);
@@ -247,8 +249,8 @@ const RacePlanner = () => {
                     >
                       Cancel
                     </Button>
-                    <Button 
-                      type="submit" 
+                    <Button
+                      type="submit"
                       className="flex-1"
                     >
                       <Save size={18} className="mr-2" />

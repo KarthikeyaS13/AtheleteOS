@@ -45,7 +45,7 @@ const TrainingHistory = () => {
   const [editingWorkout, setEditingWorkout] = useState(null);
 
   const inputClass =
-    "w-full bg-white dark:bg-[#111827] border-2 border-gray-300 dark:border-[#243244] rounded-xl px-4 py-2.5 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/50 transition-all";
+    "w-full bg-white dark:bg-[#111827] border-2 border-gray-300 dark:border-[#243244] rounded-xl px-4 py-1.5 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/50 transition-all";
 
   const columns = useMemo(() => [
     {
@@ -118,17 +118,16 @@ const TrainingHistory = () => {
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
-
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
 
       {/* Header */}
       <div className="relative animate-in fade-in slide-up">
         <div className="absolute -left-4 top-0 w-1 h-full bg-accent rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
-        <h1 className="text-4xl font-black text-gray-900 dark:text-white font-display tracking-tight italic uppercase">
+        <h1 className="text-3xl font-black text-gray-900 dark:text-white font-display tracking-tight italic uppercase">
           Training History
         </h1>
-        <p className="text-gray-500 font-medium ml-1 mt-1">
+        <p className="text-gray-500 font-medium ml-1 mt-0.5 text-sm">
           View, edit, and analyze your past workouts.
         </p>
       </div>
@@ -146,9 +145,9 @@ const TrainingHistory = () => {
                 >
                   {headerGroup.headers.map(header => (
                     <th
-                      key={header.id}
-                      className="p-5 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-[0.2em] cursor-pointer hover:text-accent transition-all group"
-                      onClick={header.column.getToggleSortingHandler()}
+                       key={header.id}
+                       className="py-3 px-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-[0.2em] cursor-pointer hover:text-accent transition-all group"
+                       onClick={header.column.getToggleSortingHandler()}
                     >
                       <div className="flex items-center gap-2">
                         {flexRender(header.column.columnDef.header, header.getContext())}
@@ -173,8 +172,8 @@ const TrainingHistory = () => {
                 >
                   {row.getVisibleCells().map(cell => (
                     <td
-                      key={cell.id}
-                      className="p-4 text-sm text-gray-700 dark:text-gray-300"
+                       key={cell.id}
+                       className="py-2.5 px-4 text-sm text-gray-700 dark:text-gray-300"
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </td>
@@ -187,7 +186,7 @@ const TrainingHistory = () => {
                 <tr>
                   <td
                     colSpan={columns.length}
-                    className="text-center py-12 text-gray-500 italic"
+                    className="text-center py-8 text-gray-500 italic text-sm"
                   >
                     No workouts found. Log your first session!
                   </td>
@@ -198,7 +197,7 @@ const TrainingHistory = () => {
         </div>
 
         {/* PAGINATION */}
-        <div className="flex items-center justify-between p-4 bg-gray-50/50 dark:bg-[#1e293b]/20 text-sm">
+        <div className="flex items-center justify-between py-3 px-4 bg-gray-50/50 dark:bg-[#1e293b]/20 text-sm">
           <span className="text-gray-500 dark:text-gray-400 font-medium">
             Page <span className="text-gray-900 dark:text-white">{table.getState().pagination.pageIndex + 1}</span> of {table.getPageCount() || 1}
           </span>
@@ -229,12 +228,11 @@ const TrainingHistory = () => {
       {/* EDIT MODAL */}
       {editingWorkout && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[100] animate-in fade-in duration-300">
-          <Card className="max-w-2xl w-full mx-4 p-8 shadow-2xl transform animate-in zoom-in-95 duration-300">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                <Edit2 size={24} className="text-accent" />
-                Edit Workout
-              </h2>
+          <Card className="max-w-2xl w-full mx-4 p-5 shadow-xl transform animate-in zoom-in-95 duration-300 !overflow-visible">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <Edit2 size={20} className="text-accent" />
+                Edit Workout</h2>
               <button 
                 onClick={() => setEditingWorkout(null)}
                 className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
@@ -258,8 +256,8 @@ const TrainingHistory = () => {
               }}
             >
               {({ values, setFieldValue }) => (
-                <Form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Form className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div className="space-y-1.5">
                       <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Date</label>
                       <DatePicker
@@ -268,6 +266,8 @@ const TrainingHistory = () => {
                         dateFormat="dd/MM/yyyy"
                         className={inputClass}
                         placeholderText="DD/MM/YYYY"
+                        popperPlacement="bottom-start"
+                        popperClassName="z-[9999]"
                       />
                     </div>
 
@@ -303,7 +303,7 @@ const TrainingHistory = () => {
 
                     <div className="space-y-1.5">
                       <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Duration (HH:MM:SS)</label>
-                      <Field name="duration" type="text" className={inputClass} />
+                      <Field name="duration" type="time" step="1" className={inputClass} />
                     </div>
 
                     <div className="space-y-1.5 md:col-span-2">
@@ -315,17 +315,17 @@ const TrainingHistory = () => {
                     </div>
                   </div>
 
-                  <div className="bg-gray-50 dark:bg-[#1e293b]/50 border border-gray-200 dark:border-gray-800 rounded-xl p-4 flex justify-between items-center">
+                  <div className="bg-gray-50 dark:bg-[#1e293b]/50 border border-gray-200 dark:border-gray-800 rounded-xl py-2 px-3 flex justify-between items-center">
                     <div>
                       <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest">New Load Score</h4>
                       <p className="text-xs text-gray-400">Recalculated based on changes</p>
                     </div>
-                    <div className="text-3xl font-black text-accent">
+                    <div className="text-2xl font-black text-accent">
                       {calculateTrainingLoad(values.sport, values.distance, values.duration, values.rpe)}
                     </div>
                   </div>
 
-                  <div className="flex gap-4 pt-4">
+                  <div className="flex gap-4 pt-2">
                     <Button 
                       type="button" 
                       variant="secondary" 

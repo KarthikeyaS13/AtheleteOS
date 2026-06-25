@@ -64,33 +64,33 @@ const Analytics = () => {
       return data;
    }, [workouts]);
 
-   return (
-      <div className="space-y-6">
+    return (
+      <div className="space-y-4">
 
          {/* Header */}
-         <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
+         <div className="mb-4">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
                Analytics
             </h1>
-            <p className="text-gray-700 dark:text-gray-400 mt-1">
+            <p className="text-gray-700 dark:text-gray-400 mt-0.5 text-sm">
                Deep dive into your performance metrics.
             </p>
          </div>
 
-         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
             {/* ATL vs CTL */}
-            <Card className="col-span-2 bg-white dark:bg-[#111827] border border-gray-200 dark:border-[#243244]">
-               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6">
+            <Card className="col-span-2 bg-white dark:bg-[#111827] border border-gray-200 dark:border-[#243244] p-4">
+               <h3 className="text-base font-bold text-gray-900 dark:text-white mb-3">
                   Fitness & Fatigue (CTL vs ATL)
                </h3>
 
-               <div className="h-80">
+               <div className="h-60">
                   <ResponsiveContainer>
                      <AreaChart data={loadData}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                        <XAxis dataKey="date" stroke="#6b7280" />
-                        <YAxis stroke="#6b7280" />
+                        <XAxis dataKey="date" stroke="#6b7280" tick={{ fontSize: 10 }} />
+                        <YAxis stroke="#6b7280" tick={{ fontSize: 10 }} />
                         <ReTooltip
                            contentStyle={{
                               backgroundColor: '#fff',
@@ -98,7 +98,7 @@ const Analytics = () => {
                               color: '#000'
                            }}
                         />
-                        <Legend />
+                        <Legend wrapperStyle={{ fontSize: 11 }} />
                         <Area type="monotone" dataKey="CTL" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.2} />
                         <Area type="monotone" dataKey="ATL" stroke="#ef4444" strokeDasharray="5 5" />
                      </AreaChart>
@@ -107,15 +107,15 @@ const Analytics = () => {
             </Card>
 
             {/* Pie */}
-            <Card className="bg-white dark:bg-[#111827] border border-gray-200 dark:border-[#243244]">
-               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+            <Card className="bg-white dark:bg-[#111827] border border-gray-200 dark:border-[#243244] p-4">
+               <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">
                   Activity Mix
                </h3>
 
-               <div className="h-64">
+               <div className="h-52">
                   <ResponsiveContainer>
                      <PieChart>
-                        <Pie data={distData} dataKey="value" innerRadius={60} outerRadius={90}>
+                        <Pie data={distData} dataKey="value" innerRadius={50} outerRadius={75}>
                            {distData.map((entry, i) => (
                               <Cell key={i} fill={COLORS[entry.name]} />
                            ))}
@@ -127,41 +127,41 @@ const Analytics = () => {
                               color: '#000'
                            }}
                         />
-                        <Legend />
-                     </PieChart>
-                  </ResponsiveContainer>
-               </div>
-            </Card>
+                        <Legend wrapperStyle={{ fontSize: 11 }} />
+                      </PieChart>
+                   </ResponsiveContainer>
+                </div>
+             </Card>
 
-            {/* Bar */}
-            <Card className="bg-white dark:bg-[#111827] border border-gray-200 dark:border-[#243244]">
-               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-                  Weekly Volume
-               </h3>
+             {/* Bar */}
+             <Card className="bg-white dark:bg-[#111827] border border-gray-200 dark:border-[#243244] p-4">
+                <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">
+                   Weekly Volume
+                </h3>
 
-               <div className="h-64">
-                  <ResponsiveContainer>
-                     <BarChart data={volData}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                        <XAxis dataKey="week" stroke="#6b7280" />
-                        <YAxis stroke="#6b7280" />
-                        <ReTooltip
-                           contentStyle={{
-                              backgroundColor: '#fff',
-                              border: '1px solid #e5e7eb',
-                              color: '#000'
-                           }}
-                        />
-                        <Legend />
-                        <Bar dataKey="Running" fill="#3b82f6" />
-                        <Bar dataKey="CyclingNormalized" fill="#22c55e" />
-                     </BarChart>
-                  </ResponsiveContainer>
-               </div>
-            </Card>
+                <div className="h-52">
+                   <ResponsiveContainer>
+                      <BarChart data={volData}>
+                         <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                         <XAxis dataKey="week" stroke="#6b7280" tick={{ fontSize: 10 }} />
+                         <YAxis stroke="#6b7280" tick={{ fontSize: 10 }} />
+                         <ReTooltip
+                            contentStyle={{
+                               backgroundColor: '#fff',
+                               border: '1px solid #e5e7eb',
+                               color: '#000'
+                            }}
+                         />
+                         <Legend wrapperStyle={{ fontSize: 11 }} />
+                         <Bar dataKey="Running" fill="#3b82f6" />
+                         <Bar dataKey="CyclingNormalized" fill="#22c55e" />
+                      </BarChart>
+                   </ResponsiveContainer>
+                </div>
+             </Card>
 
-         </div>
-      </div>
+          </div>
+       </div>
    );
 };
 
